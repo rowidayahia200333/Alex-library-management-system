@@ -364,6 +364,9 @@ void list_by_alpha_of_title() {
 	system("pause");
 	system("cls");
 	Sleep(1000);
+
+	delete[] book_tit2 , book_auth2;
+	book_tit2, book_auth2 = nullptr;
 }
 
 void updating_books(int id) {
@@ -506,18 +509,23 @@ void search_by_first_litter() {
 
 		for (int i = 0; i < book_count; i++) {
 
-			if (book_title[i][0] == first_litter) {
+			if (hide[i] == true) {
 
-				is_notfound_first = false;
-
-				cout << "ID: " << ids[i] << endl
-					<< "Book title: " << book_title[i] << endl
-					<< "Book author: " << book_author[i] << endl
-					<< "Status: Avalabil. \n"
-					<< "================================" << endl;
+				continue;
 			}
-			
+			else {
+				if (book_title[i][0] == first_litter) {
 
+					is_notfound_first = false;
+
+					cout << "ID: " << ids[i] << endl
+						<< "Book title: " << book_title[i] << endl
+						<< "Book author: " << book_author[i] << endl
+						<< "Status: Avalabil. \n"
+						<< "================================" << endl;
+				}
+
+			}
 		}
 	}
 
@@ -560,7 +568,124 @@ void display_info( int id, int size) {
 		<< "The author of this book is: " << book_author[index] << endl;
 }
 
+void welcome() {
 
+	cout << "\n\n\n\n\n\n\n\n";
+
+
+
+
+	cout <<
+		"                               #####    #        ######    #   #\n"
+		"                               #   #    #        #          # # \n"
+		"                               #   #    #        #           #  \n"
+		"                               #####    #        #####       #  \n"
+		"                               #   #    #        #          # # \n"
+		"                               #   #    #        #         #   #\n"
+		"                               #   #    #####    ######    #   #\n\n";
+
+
+	cout <<
+		"                               #        #####   #####    #####   #####    #####    #   #\n"
+		"                               #          #     #    #   #   #   #   #    #   #     # # \n"
+		"                               #          #     #     #  #####   #####    #####      #  \n"
+		"                               #          #     ######   # #     #   #    # #        #  \n"
+		"                               #          #     #     #  #  #    #   #    #   #      #  \n"
+		"                               #          #     #    #   #   #   #   #    #     #    #  \n"
+		"                               ######   #####   #####    #    #  #   #    #      #   #  \n";
+
+
+
+	Sleep(3000);
+	system("cls");
+}
+
+void display_all_menu() {
+
+	while (true) {
+
+	there:
+
+		cout << "What do you need: \n\n";
+		cout << "1- List all books.\n\n";
+		cout << "2- list of all books by alphabet of the titles of the books.\n\n";
+		cout << "3- Add new book.\n\n";
+		cout << "4- Update an existing book.\n\n";
+		cout << "5- Remove a book.\n\n";
+		cout << "6- Borrow a book.\n\n";
+		cout << "7- Return a book.\n\n";
+		cout << "8- search for a book.\n\n";
+		cout << "9- search for all books by the first litter of the title of these books.\n\n";
+		cout << "10- Exit.\n\n";
+
+
+		cout << "Choose only a number please: ";
+
+		cin >> choice;
+
+
+		if (choice < 1 || choice > 10) {
+			cout << "\nWrong choice.\n\n";
+
+			system("pause");
+			system("cls");
+			goto there;
+
+		}
+		else {
+			switch (choice) {
+			case 1:
+				system("cls");
+				list_of_books();
+				break;
+			case 2:
+				system("cls");
+				list_by_alpha_of_title();
+				break;
+			case 3:
+				system("cls");
+				add_new_book();
+				break;
+			case 4:
+				system("cls");
+
+				updating_books(id);
+				break;
+			case 5:
+				system("cls");
+
+				found_to_remove(id_removeit);
+				break;
+			case 6:
+				system("cls");
+
+				borrow_book(borrow_id);
+				break;
+			case 7:
+				system("cls");
+
+				return_book(return_id);
+				break;
+			case 8:
+				system("cls");
+
+				search_book(searching_id);
+				break;
+			case 9:
+				system("cls");
+				search_by_first_litter();
+				break;
+			case 10:
+				system("cls");
+				cout << "Thank you for using Alex libarary.\n";
+				return ;
+			}
+		}
+
+
+
+	}
+}
 
 
 int main() {
@@ -569,132 +694,13 @@ int main() {
 
 	system("color 71");
 
-
-	cout << "\n\n\n\n\n\n\n\n";
-			 
-		
-
-
-		cout <<
-			"                               #####    #        ######    #   #\n"
-			"                               #   #    #        #          # # \n"
-			"                               #   #    #        #           #  \n"
-			"                               #####    #        #####       #  \n"
-			"                               #   #    #        #          # # \n"
-			"                               #   #    #        #         #   #\n"
-			"                               #   #    #####    ######    #   #\n\n";
-			                                
-			                                
-		cout                                <<
-			"                               #        #####   #####    #####   #####    #####    #   #\n"
-			"                               #          #     #    #   #   #   #   #    #   #     # # \n"
-			"                               #          #     #     #  #####   #####    #####      #  \n"
-			"                               #          #     ######   # #     #   #    # #        #  \n"
-			"                               #          #     #     #  #  #    #   #    #   #      #  \n"
-			"                               #          #     #    #   #   #   #   #    #     #    #  \n"
-			"                               ######   #####   #####    #    #  #   #    #      #   #  \n";
-
-
+	welcome();
 	
-	Sleep(3000);
-	system("cls");
 
 	initialize_all_arrays();
 	
 	
-	
-	
-	
-	while (true) {
-       
-		there:
-		
-			cout << "What do you need: \n\n";
-			cout << "1- List all books.\n\n";
-			cout << "2- list of all books by alphabet of the titles of the books.\n\n";
-			cout << "3- Add new book.\n\n";
-			cout << "4- Update an existing book.\n\n";
-			cout << "5- Remove a book.\n\n";
-			cout << "6- Borrow a book.\n\n";
-			cout << "7- Return a book.\n\n";
-			cout << "8- search for a book.\n\n";
-			cout << "9- search for all books by the first litter of the title of these books.\n\n";
-			cout << "10- Exit.\n\n";
-
-
-			cout << "Choose only a number please: ";
-
-			cin >> choice;
-
-
-			if (choice < 1 || choice > 10) {
-				cout << "\nWrong choice.\n\n";
-
-				system("pause");
-				system("cls");
-				goto there;
-
-			}
-			else {
-				switch (choice) {
-				case 1:
-					system("cls");
-					list_of_books();
-					break;
-				case 2:
-					system("cls");
-					list_by_alpha_of_title();
-					break;
-				case 3:
-					system("cls");
-					add_new_book();
-					break;
-				case 4:
-					system("cls");
-
-					updating_books(id);
-					break;
-				case 5:
-					system("cls");
-
-					found_to_remove(id_removeit);
-					break;
-				case 6:
-					system("cls");
-
-					borrow_book(borrow_id);
-					break;
-				case 7:
-					system("cls");
-
-					return_book(return_id);
-					break;
-				case 8:
-					system("cls");
-
-					search_book(searching_id);
-					break;
-				case 9:
-					system("cls");
-					search_by_first_litter();
-					break;
-				case 10:
-					system("cls");
-					cout << "Thank you for using Alex libarary.\n";
-					return 0;
-				}
-			}
-
-		
-
-	}
-	
-	
-
-	
-	
-	
-
+	display_all_menu();
 	
 	
 
